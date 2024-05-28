@@ -613,16 +613,20 @@ textarea {
     content: "원";
   }
 
-  #sub > .market > .list > .paging {
-    margin: 20px 0;
+  #sub > .market > .list > .page {
     text-align: center;
+    margin-top: 10px;
   }
-  #sub > .market > .list > .paging > a {
-    color: #999;
+  #sub > .market > .list > .page > a {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid #d7d7d7;
+    background: #f2f2f2;
   }
-  #sub > .market > .list > .paging > .on {
-    color: #111;
-    text-decoration: underline;
+  #sub > .market > .list > .page > .current {
+    border: 1px solid #6d6d6d;
+    background: #888;
+    color: #fff;
   }
 
   #sub > .market > .view > h3 {

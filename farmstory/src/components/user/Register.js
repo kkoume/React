@@ -1,32 +1,31 @@
 import React, { useState } from "react";
+import DefaultLayout from "../../layouts/DefaultLayout";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
+const initState = {
+  uid: "",
+  pass: "",
+  name: "",
+  nick: "",
+  email: "",
+  hp: "",
+  zip: "",
+  addr1: "",
+  addr2: "",
+};
 
 const Register = () => {
   const navigate = useNavigate();
-
-  const [user, setUser] = useState({
-    uid: "",
-    pass: "",
-    name: "",
-    nick: "",
-    email: "",
-    hp: "",
-    zip: "",
-    addr1: "",
-    addr2: "",
-  });
+  const [user, setUser] = useState({ ...initState });
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    console.log(user);
 
     axios
       .post("http://localhost:8080/user", user)
       .then((response) => {
         console.log(response.data);
-        alert("회원가입 완료!");
 
         navigate("/user/login");
       })
@@ -35,6 +34,7 @@ const Register = () => {
       });
   };
 
+  // 입력 필드 변경시 상태 업데이트
   const changeHandler = (e) => {
     e.preventDefault();
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -56,7 +56,7 @@ const Register = () => {
                 onChange={changeHandler}
               />
               <button>
-                <img src="../images/chk_id.gif" alt="" />
+                <img src="/images/chk_id.gif" alt="중복체크" />
               </button>
               <span class="resultId"></span>
             </td>
@@ -132,8 +132,8 @@ const Register = () => {
                 type="text"
                 name="hp"
                 placeholder="- 포함 13자리 입력"
-                minlength="13"
-                maxlength="13"
+                minLength="13"
+                maxLength="13"
                 value={user.hp}
                 onChange={changeHandler}
               />
@@ -147,12 +147,11 @@ const Register = () => {
                   type="text"
                   name="zip"
                   placeholder="우편번호"
-                  readonly
                   value={user.zip}
                   onChange={changeHandler}
                 />
                 <button class="btnZip">
-                  <img src="../images/chk_post.gif" alt="" />
+                  <img src="/images/chk_post.gif" alt="" />
                 </button>
               </div>
               <div>
@@ -177,12 +176,11 @@ const Register = () => {
           </tr>
         </table>
 
+        {/* prettier-ignore */}
         <div>
-          <a href="#" class="btnCancel">
-            취소
-          </a>
-          <input type="submit" class="btnRegister" value="회원가입" />
-        </div>
+              <Link to="/user/login" class="btnCancel">취소</Link>
+              <input type="submit" class="btnRegister" value="회원가입" />
+            </div>
       </form>
     </section>
   );
